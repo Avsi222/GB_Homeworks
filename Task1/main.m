@@ -28,8 +28,6 @@ int main(int argc, const char * argv[]) {
         int AVG = (first+second+third)/3;
         printf("Среднее арифметическое = %d \n",AVG);
         
-        
-        
     }
     return 0;
 }
