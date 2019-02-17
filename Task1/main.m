@@ -8,25 +8,64 @@
 
 #import <Foundation/Foundation.h>
 
+void checkSymbol(char inputChar) {
+    
+    char array[] = {'a','b','c','d','e','f','g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r', 's', 't', 'u', 'v', 'w', 'x', 'y','z'};
+    int count = strlen(array);
+    int i;
+    int flag = 0;
+    
+    for (i = 0; i < count; i++){
+        //printf("@%c,@%c",array[i],inputChar);
+        if (array[i] == inputChar){
+            flag = 1;
+            break;
+        }
+    }
+    
+    if (flag == 1){
+        printf("Данная буква входит в английский алфавит \n");
+    }else{
+        printf("Данная буква не входит в английский алфавит \n");
+    }
+}
+
+
+int calculate(NSString *method, int a, int b) {
+    
+    if ([method isEqualToString:@"+"]) {
+        return a + b;
+    }
+    else if ([method isEqualToString:@"-"]) {
+        return a - b;
+    }
+    else if ([method isEqualToString:@"*"]) {
+        return a * b;
+    }
+    else if ([method isEqualToString:@"/"]) {
+        return a / b;
+    }
+    else if ([method isEqualToString:@"%"]) {
+        return a % b;
+    }
+    else {
+        NSLog(@"Функция не знает переданный метод");
+        return 0;
+    }
+    
+    return a + b;
+    
+}
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        int first = 0;
-        int second = 0;
-        int third = 0;
         
-        printf("Первое число: ");
-        scanf("%d", &first);
-        printf("Второе число: ");
-        scanf("%d", &second);
-        printf("Результат сложения: %d, Результат вычитания: %d, Результат деления:  %d, Результат умножения: %d \n", first + second,first - second,first / second,first * second);
+        char inputChar;
         
-        printf("Среднее арифметическое трех чисел \n");
-        printf("Введите три числа через пробел \n");
+        printf("Введите букву: ");
+        scanf("%c", &inputChar);
         
-        scanf("%d %d %d", &first,&second,&third);
-        int AVG = (first+second+third)/3;
-        printf("Среднее арифметическое = %d \n",AVG);
+        checkSymbol(inputChar);
         
     }
     return 0;
