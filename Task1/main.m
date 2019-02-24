@@ -8,45 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-void checkSymbol(char inputChar) {
-    
-    char array[] = {'a','b','c','d','e','f','g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q','r', 's', 't', 'u', 'v', 'w', 'x', 'y','z'};
-    int count = strlen(array);
-    int i;
-    int flag = 0;
-    
-    for (i = 0; i < count; i++){
-        //printf("@%c,@%c",array[i],inputChar);
-        if (array[i] == inputChar){
-            flag = 1;
-            break;
-        }
-    }
-    
-    if (flag == 1){
-        printf("Данная буква входит в английский алфавит \n");
-    }else{
-        printf("Данная буква не входит в английский алфавит \n");
-    }
-}
+
 
 
 int calculate(NSString *method, int a, int b) {
     
     if ([method isEqualToString:@"+"]) {
-        return a + b;
+        return calculate_sum(a,b);
     }
     else if ([method isEqualToString:@"-"]) {
-        return a - b;
+        return calculate_razn(a,b);
     }
     else if ([method isEqualToString:@"*"]) {
-        return a * b;
+        return calculate_proiz(a,b);
     }
     else if ([method isEqualToString:@"/"]) {
-        return a / b;
-    }
-    else if ([method isEqualToString:@"%"]) {
-        return a % b;
+        return calculate_del(a,b);
     }
     else {
         NSLog(@"Функция не знает переданный метод");
@@ -57,15 +34,86 @@ int calculate(NSString *method, int a, int b) {
     
 }
 
+
+int calculate_sum(int a, int b) {
+    return a + b;
+}
+
+int calculate_razn(int a, int b) {
+    return a - b;
+}
+
+int calculate_proiz(int a, int b) {
+    return a * b;
+}
+
+int calculate_del(int a, int b) {
+    return a / b;
+}
+
+enum Operat {
+    slozh,
+    razn,
+    del,
+    proiz
+};
+
+typedef enum Operat Operat;
+
+
+int ChechSymbol(Operat oper,int a,int b){
+    
+    if (oper == slozh) {
+        return calculate_sum(a, b);
+    }
+    if (oper == razn) {
+        return calculate_razn(a, b);
+    }
+    if (oper == proiz) {
+        return calculate_proiz(a, b);
+    }
+    if (oper == del) {
+        return calculate_del(a, b);
+    }
+    return 0;
+}
+
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-        char inputChar;
+        //TASK 1: Программа которая будет выводить список введенных пользователй значений
         
-        printf("Введите букву: ");
-        scanf("%c", &inputChar);
+        NSString *inputChar;
+        printf("Введите значения: \n");
+        scanf("%s", &inputChar);
+        printf("%s \n",&inputChar);
         
-        checkSymbol(inputChar);
+        //TASK 2: Калькулятор с перечислениями
+        
+
+        int a = 10,b = 5;
+        char symb;
+        printf("a = %i, b = %i \n",a,b);
+        
+        Operat operation = slozh;
+        NSLog(@"Сложение  = %i",ChechSymbol(operation, a, b));
+        
+        
+        operation = razn;
+        NSLog(@"Разность  = %i",ChechSymbol(operation, a, b));
+        
+        operation = proiz;
+        NSLog(@"Умножение  = %i",ChechSymbol(operation, a, b));
+        
+        operation = del;
+        NSLog(@"Деление  = %i",ChechSymbol(operation, a, b));
+        
+        
+        
+        
+
+        
         
     }
     return 0;
