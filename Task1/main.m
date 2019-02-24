@@ -84,10 +84,10 @@ int main(int argc, const char * argv[]) {
         
         //TASK 1: Программа которая будет выводить список введенных пользователй значений
         
-        NSString *inputChar;
-        printf("Введите значения: \n");
-        scanf("%s", &inputChar);
-        printf("%s \n",&inputChar);
+        //NSString *inputChar;
+        //printf("Введите значения: \n");
+        //scanf("%s", &inputChar);
+        //printf("%s \n",&inputChar);
         
         //TASK 2: Калькулятор с перечислениями
         
@@ -111,6 +111,33 @@ int main(int argc, const char * argv[]) {
         
         
         
+        //TASK 3: Создадим структуру пользователя. И добавим в нее список пользователей.
+        
+        struct Users {
+            NSString *name;
+            int   user_id;
+        };
+        
+        int Count_Users = 0;
+        printf("Введите количество пользователей: \n");
+        scanf("%i",&Count_Users);
+        
+        struct Users Users_mass[Count_Users];
+        
+        
+        for (int i = 0; i<Count_Users; i++) {
+            printf("Введите имя пользователя: \n");
+           
+            char str[50] = {0};
+            scanf("%s", str);
+            NSString *lastName = [NSString stringWithUTF8String:str];
+            Users_mass[i].user_id = i;
+            Users_mass[i].name = lastName;
+        }
+        
+        for (int i = 0; i<Count_Users; i++) {
+            NSLog(@"Пользователь %i с именем %@",Users_mass[i].user_id,Users_mass[i].name);
+        }
         
 
         
