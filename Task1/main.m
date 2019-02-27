@@ -10,6 +10,23 @@
 
 
 
+int calculate_sum(int a, int b) {
+    return a + b;
+}
+
+int calculate_razn(int a, int b) {
+    return a - b;
+}
+
+int calculate_proiz(int a, int b) {
+    return a * b;
+}
+
+int calculate_del(int a, int b) {
+    return a / b;
+}
+
+
 
 int calculate(NSString *method, int a, int b) {
     
@@ -32,23 +49,6 @@ int calculate(NSString *method, int a, int b) {
     
     return a + b;
     
-}
-
-
-int calculate_sum(int a, int b) {
-    return a + b;
-}
-
-int calculate_razn(int a, int b) {
-    return a - b;
-}
-
-int calculate_proiz(int a, int b) {
-    return a * b;
-}
-
-int calculate_del(int a, int b) {
-    return a / b;
 }
 
 enum Operat {
@@ -93,7 +93,6 @@ int main(int argc, const char * argv[]) {
         
 
         int a = 10,b = 5;
-        char symb;
         printf("a = %i, b = %i \n",a,b);
         
         Operat operation = slozh;
