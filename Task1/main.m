@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-
+#import "Wheel.h"
+#import "Engine.h"
+#import "Car.h"
+#import "Helm.h"
 
 int calculate_sum(int a, int b) {
     return a + b;
@@ -81,17 +84,7 @@ int ChechSymbol(Operat oper,int a,int b){
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        
-        //TASK 1: Программа которая будет выводить список введенных пользователй значений
-        
-        //NSString *inputChar;
-        //printf("Введите значения: \n");
-        //scanf("%s", &inputChar);
-        //printf("%s \n",&inputChar);
-        
-        //TASK 2: Калькулятор с перечислениями
-        
-
+        /*
         int a = 10,b = 5;
         printf("a = %i, b = %i \n",a,b);
         
@@ -108,38 +101,34 @@ int main(int argc, const char * argv[]) {
         operation = del;
         NSLog(@"Деление  = %i",ChechSymbol(operation, a, b));
         
+        */
+        Car *car = [[Car alloc] init];
+        
+        // Создание первого колеса
+        Wheel *wheel1 = [[Wheel alloc] initWithNumber:@1];
+        // Создание второго колеса
+        Wheel *wheel2 = [[Wheel alloc] initWithNumber:@2];
+        // Создание третьего колеса
+        Wheel *wheel3 = [[Wheel alloc] initWithNumber:@3];
+        // Создание четвертого колеса
+        Wheel *wheel4 = [[Wheel alloc] initWithNumber:@4];
+        // Создание пятого колеса
+        Wheel *wheel5 = [[Wheel alloc] initWithNumber:@5];
+        // Создание шестого колеса
+        Wheel *wheel6 = [[Wheel alloc] initWithNumber:@6];
         
         
-        //TASK 3: Создадим структуру пользователя. И добавим в нее список пользователей.
+        // Создание массива колес
+        NSArray *wheels = [[NSArray alloc] initWithObjects:wheel1, wheel2, wheel3, wheel4,wheel5,wheel6, nil];
+        // Создание двигателя
+        Engine *engine = [[Engine alloc] initWithModel:@"BMW X5M 400x"];
+        //Создание руля
+        Helm *helm = [[Helm alloc]initWithModel:@"BMW M SPORT РУЛЬ"];
+        // Конфигурация автомобиля с созданными компонентами
+        [car configWithEngine:engine andhelm:helm andWheels:wheels];
         
-        struct Users {
-            NSString *name;
-            int   user_id;
-        };
-        
-        int Count_Users = 0;
-        printf("Введите количество пользователей: \n");
-        scanf("%i",&Count_Users);
-        
-        struct Users Users_mass[Count_Users];
-        
-        
-        for (int i = 0; i<Count_Users; i++) {
-            printf("Введите имя пользователя: \n");
-           
-            char str[50] = {0};
-            scanf("%s", str);
-            NSString *lastName = [NSString stringWithUTF8String:str];
-            Users_mass[i].user_id = i;
-            Users_mass[i].name = lastName;
-        }
-        
-        for (int i = 0; i<Count_Users; i++) {
-            NSLog(@"Пользователь %i с именем %@",Users_mass[i].user_id,Users_mass[i].name);
-        }
-        
-
-        
+        // Освобождение автомобиля и удаление компонентов
+        [car release]; 
         
     }
     return 0;
