@@ -7,128 +7,62 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import "Wheel.h"
-#import "Engine.h"
-#import "Car.h"
-#import "Helm.h"
-
-int calculate_sum(int a, int b) {
-    return a + b;
-}
-
-int calculate_razn(int a, int b) {
-    return a - b;
-}
-
-int calculate_proiz(int a, int b) {
-    return a * b;
-}
-
-int calculate_del(int a, int b) {
-    return a / b;
-}
-
-
-
-int calculate(NSString *method, int a, int b) {
-    
-    if ([method isEqualToString:@"+"]) {
-        return calculate_sum(a,b);
-    }
-    else if ([method isEqualToString:@"-"]) {
-        return calculate_razn(a,b);
-    }
-    else if ([method isEqualToString:@"*"]) {
-        return calculate_proiz(a,b);
-    }
-    else if ([method isEqualToString:@"/"]) {
-        return calculate_del(a,b);
-    }
-    else {
-        NSLog(@"Функция не знает переданный метод");
-        return 0;
-    }
-    
-    return a + b;
-    
-}
-
-enum Operat {
-    slozh,
-    razn,
-    del,
-    proiz
-};
-
-typedef enum Operat Operat;
-
-
-int ChechSymbol(Operat oper,int a,int b){
-    
-    if (oper == slozh) {
-        return calculate_sum(a, b);
-    }
-    if (oper == razn) {
-        return calculate_razn(a, b);
-    }
-    if (oper == proiz) {
-        return calculate_proiz(a, b);
-    }
-    if (oper == del) {
-        return calculate_del(a, b);
-    }
-    return 0;
-}
-
+#import "Calculate.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        /*
-        int a = 10,b = 5;
-        printf("a = %i, b = %i \n",a,b);
+        // Task 1. Придумать 6 блоков
+        // Task 2. Use separate queues to print resulsts
+        int firstNumber = 10;
+        int secondNumber = 5;
         
-        Operat operation = slozh;
-        NSLog(@"Сложение  = %i",ChechSymbol(operation, a, b));
+        int sum = [Calculate beginWithOperation:1 firstNumber:firstNumber secondNumber:secondNumber];
+        int Razn = [Calculate beginWithOperation: 2 firstNumber:firstNumber secondNumber:secondNumber];
+        int Proizv = [Calculate beginWithOperation: 3 firstNumber:firstNumber secondNumber:secondNumber];
+        int Del = [Calculate beginWithOperation: 4 firstNumber:firstNumber secondNumber:secondNumber];
+        int Stepen = [Calculate beginWithOperation: 5 firstNumber:firstNumber secondNumber:secondNumber];
+        int sumSquares = [Calculate beginWithOperation: 6 firstNumber:firstNumber secondNumber:secondNumber];
         
+        //QOS_CLASS_USER_INTERACTIVE задания, которые взаимодействуют с пользователем и занимают мало времени
+        dispatch_queue_t asyncQueue = dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0);
+        dispatch_async(asyncQueue, ^{
+            NSLog(@"Just 1");
+            NSLog(@"Just 2");
+            NSLog(@"Just 3");
+            NSLog(@"Just 4");
+            NSLog(@"Just 5");
+            NSLog(@"Just 6");
+            NSLog(@"Just 7");
+            NSLog(@"Just 8");
+            NSLog(@"Just 9");
+        });
         
-        operation = razn;
-        NSLog(@"Разность  = %i",ChechSymbol(operation, a, b));
+        //concurrent queue
+        dispatch_queue_t consecutiveQueue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
+        dispatch_sync(consecutiveQueue, ^{
+            NSLog(@"%d + %d = %d", firstNumber, secondNumber, sum);
+            NSLog(@"%d - %d = %d", firstNumber, secondNumber, Razn);
+        });
         
-        operation = proiz;
-        NSLog(@"Умножение  = %i",ChechSymbol(operation, a, b));
+        dispatch_suspend(consecutiveQueue);
         
-        operation = del;
-        NSLog(@"Деление  = %i",ChechSymbol(operation, a, b));
+        // Create another queue
+        dispatch_queue_t anotherQueue = dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0);
+        dispatch_async(anotherQueue, ^{
+            NSLog(@"%d * %d = %d", firstNumber, secondNumber, Proizv);
+            NSLog(@"%d / %d = %d", firstNumber, secondNumber, Del);
+        });
         
-        */
-        Car *car = [[Car alloc] init];
+        //NSOperationQueue
+        NSOperationQueue *operationQueue = [NSOperationQueue new];
+        [operationQueue addOperationWithBlock:^{
+            NSLog(@"%d ^ %d = %d", firstNumber, secondNumber, Stepen);
+        }];
+        [operationQueue addOperationWithBlock:^{
+            NSLog(@"%d^2 + %d^2 = %d", firstNumber, secondNumber, sumSquares);
+        }];
         
-        // Создание первого колеса
-        Wheel *wheel1 = [[Wheel alloc] initWithNumber:@1];
-        // Создание второго колеса
-        Wheel *wheel2 = [[Wheel alloc] initWithNumber:@2];
-        // Создание третьего колеса
-        Wheel *wheel3 = [[Wheel alloc] initWithNumber:@3];
-        // Создание четвертого колеса
-        Wheel *wheel4 = [[Wheel alloc] initWithNumber:@4];
-        // Создание пятого колеса
-        Wheel *wheel5 = [[Wheel alloc] initWithNumber:@5];
-        // Создание шестого колеса
-        Wheel *wheel6 = [[Wheel alloc] initWithNumber:@6];
-        
-        
-        // Создание массива колес
-        NSArray *wheels = [[NSArray alloc] initWithObjects:wheel1, wheel2, wheel3, wheel4,wheel5,wheel6, nil];
-        // Создание двигателя
-        Engine *engine = [[Engine alloc] initWithModel:@"BMW X5M 400x"];
-        //Создание руля
-        Helm *helm = [[Helm alloc]initWithModel:@"BMW M SPORT РУЛЬ"];
-        // Конфигурация автомобиля с созданными компонентами
-        [car configWithEngine:engine andhelm:helm andWheels:wheels];
-        
-        // Освобождение автомобиля и удаление компонентов
-        [car release]; 
+        dispatch_resume(consecutiveQueue);
         
     }
     return 0;
