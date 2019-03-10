@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9A9DCF722212BD6300DFB154 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9DCF712212BD6300DFB154 /* main.m */; };
+		9AF15EF52234D85E004C36F9 /* Calculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF15EF42234D85E004C36F9 /* Calculate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		9A9DCF6E2212BD6300DFB154 /* Task1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Task1; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A9DCF712212BD6300DFB154 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9AF15EF32234D85E004C36F9 /* Calculate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Calculate.h; sourceTree = "<group>"; };
+		9AF15EF42234D85E004C36F9 /* Calculate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Calculate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				9A9DCF712212BD6300DFB154 /* main.m */,
+				9AF15EF32234D85E004C36F9 /* Calculate.h */,
+				9AF15EF42234D85E004C36F9 /* Calculate.m */,
 			);
 			path = Task1;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AF15EF52234D85E004C36F9 /* Calculate.m in Sources */,
 				9A9DCF722212BD6300DFB154 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +245,7 @@
 		9A9DCF762212BD6300DFB154 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 623JYZ98ZP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -248,6 +255,7 @@
 		9A9DCF772212BD6300DFB154 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 623JYZ98ZP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
